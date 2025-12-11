@@ -5,6 +5,7 @@ import { webpackBundler } from '@vuepress/bundler-webpack'
 
 export default defineUserConfig({
   lang: 'en-US',
+  base: '/blog/',
 
   title: 'VuePress',
   description: 'My first VuePress Site',
@@ -13,7 +14,7 @@ export default defineUserConfig({
     logo: 'https://vuejs.press/images/hero.png',
 
     navbar: [
-      '/blog/',
+      '/',
       {
         text: 'Article',
         link: '/article/',
