@@ -16,18 +16,21 @@ import { plumeTheme } from 'vuepress-theme-plume'
 export default defineUserConfig({
   base: '/blog/',
   lang: 'zh-CN',
-  title: 'bakalu blog',
+  title: 'bakalu的blog',
   description: 'blog',
 
   head: [
     // 配置站点图标
-    ['link', { rel: 'icon', type: 'image/png', href: 'https://theme-plume.vuejs.press/favicon-32x32.png' }],
+    ['link', { rel: 'icon', type: 'image/png', href: 'https://github.com/bakalu114514/my-images/blob/main/mygo_logo.png?raw=true' }],
   ],
 
   bundler: viteBundler(),
   shouldPrefetch: false, // 站点较大，页面数量较多时，不建议启用
 
   theme: plumeTheme({
+    collections: [ 
+      { type: 'post', dir: 'blog', title: '博客' }
+    ],
     /* 添加您的部署域名, 有助于 SEO, 生成 sitemap */
     // hostname: 'https://your_site_url',
 
@@ -175,3 +178,4 @@ export default defineUserConfig({
     // }
   }),
 })
+

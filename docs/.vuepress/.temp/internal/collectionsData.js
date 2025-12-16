@@ -1,4 +1,4 @@
-export const collections = {"/":[{"type":"post","dir":"blog","title":"Blog","link":"/blog/","linkPrefix":"/blog/","tags":true,"tagsLink":"/blog/tags/","archives":true,"archivesLink":"/blog/archives/","categories":true,"categoriesLink":"/blog/categories/"},{"type":"doc","dir":"demo","linkPrefix":"/demo","title":"Demo"}]}
+export const collections = {"/":[{"type":"post","dir":"blog","title":"博客","link":"/blog/","linkPrefix":"/blog/","tags":true,"tagsLink":"/blog/tags/","archives":true,"archivesLink":"/blog/archives/","categories":true,"categoriesLink":"/blog/categories/"}]}
 
 if (import.meta.webpackHot) {
   import.meta.webpackHot.accept()

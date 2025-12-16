@@ -1,0 +1,40 @@
+<template><div><h2 id="前言" tabindex="-1"><a class="header-anchor" href="#前言"><span>前言</span></a></h2>
+<p>这是我的第一篇博客，算是一次随手记录，也作为博客的起点。</p>
+<p>在此之前，我已经通过 Vue 项目的创建教程，学会了基本的 Vue 项目初始化流程。今天在此基础上，成功搭建并部署了自己的博客。</p>
+<h2 id="博客搭建过程" tabindex="-1"><a class="header-anchor" href="#博客搭建过程"><span>博客搭建过程</span></a></h2>
+<p>本次博客使用的是 <strong>VuePress</strong>，并选择了 <strong>Plume 主题</strong>（感谢作者 <strong>pengzhanbo</strong>）。<br>
+整体流程和创建普通 Vue 项目类似，上手难度不算高，配置也相对清晰。</p>
+<h2 id="遇到的问题与踩坑记录" tabindex="-1"><a class="header-anchor" href="#遇到的问题与踩坑记录"><span>遇到的问题与踩坑记录</span></a></h2>
+<p>真正花时间的地方主要集中在 <strong>GitHub Pages 的部署</strong> 上。</p>
+<h3 id="_1-部署方式更新" tabindex="-1"><a class="header-anchor" href="#_1-部署方式更新"><span>1. 部署方式更新</span></a></h3>
+<p>之前查到的一些部署方法已经被替代，现在有了更加简化的流程。但需要注意的是：</p>
+<ul>
+<li><strong>在 commit 时一定要填写提交信息</strong></li>
+<li>如果忘记命名 commit，虽然不影响功能，但会浪费不少排查时间</li>
+</ul>
+<h3 id="_2-base-配置导致-css-不生效" tabindex="-1"><a class="header-anchor" href="#_2-base-配置导致-css-不生效"><span>2. base 配置导致 CSS 不生效</span></a></h3>
+<p>在提交并部署完成后，还需要重点检查：</p>
+<ul>
+<li><code v-pre>deploy.yml</code> 中的 <code v-pre>base</code> 是否设置正确</li>
+<li>如果 <code v-pre>base</code> 配置错误，页面会正常打开，但 <strong>CSS 无法加载</strong></li>
+</ul>
+<p>此时可以：</p>
+<ul>
+<li>在网页中按 <strong>F12</strong> 打开开发者工具</li>
+<li>查看控制台报错，通常会看到 <strong>404（资源未找到）</strong> 的错误信息</li>
+</ul>
+<h3 id="_3-github-pages-部署延迟" tabindex="-1"><a class="header-anchor" href="#_3-github-pages-部署延迟"><span>3. GitHub Pages 部署延迟</span></a></h3>
+<p>还有一个容易让人误判的问题：</p>
+<ul>
+<li>GitHub 显示 <strong>Actions 运行成功</strong></li>
+<li>但页面样式依然不生效</li>
+</ul>
+<p>这种情况<strong>不一定是配置错误</strong>，而是 GitHub Pages 的缓存与同步存在延迟。<br>
+<strong>解决方法很简单：等待 3～5 分钟即可。</strong></p>
+<h2 id="结语" tabindex="-1"><a class="header-anchor" href="#结语"><span>结语</span></a></h2>
+<p>总体来说，这是一次还算顺利但也踩了不少小坑的经历。<br>
+通过这次博客的搭建，对 VuePress、GitHub Pages 部署流程以及常见问题都有了更直观的认识。</p>
+<p>希望之后能持续记录学习过程，把这个博客真正用起来。</p>
+</div></template>
+
+

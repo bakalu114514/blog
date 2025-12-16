@@ -1,4 +1,4 @@
-export const sidebar = {"/":{"/demo/":{"items":["","foo","bar"],"prefix":"/demo/"}},"__auto__":{},"__home__":{}}
+export const sidebar = {"/":{},"__auto__":{},"__home__":{}}
 
 if (import.meta.webpackHot) {
   import.meta.webpackHot.accept()
