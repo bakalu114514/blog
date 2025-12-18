@@ -3,12 +3,11 @@
 title: Vue 学习笔记（二）：事件处理（v-on）
 date: 2025-12-18
 tags:
-
-* Vue
-* 前端学习
-* 学习笔记
-  categories:
-* Vue
+  - Vue
+  - 前端学习
+  - 学习笔记
+categories:
+  - Vue
 
 ---
 
