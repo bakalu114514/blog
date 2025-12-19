@@ -1,14 +1,14 @@
 ---
-
 title: Vue 学习笔记（二）：事件处理（v-on）
-date: 2025-12-18
+date: 2025-12-18T00:00:00.000Z
 tags:
   - Vue
   - 前端学习
   - 学习笔记
 categories:
   - Vue
-
+createTime: 2025/12/18 16:00:25
+permalink: /blog/n17sr6ew/
 ---
 
 # Vue 学习笔记（二）：事件处理（v-on）

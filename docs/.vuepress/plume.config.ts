@@ -18,7 +18,7 @@ import collections from './collections'
  * @see https://theme-plume.vuejs.press/config/theme/
  */
 export default defineThemeConfig({
-  logo: 'https://theme-plume.vuejs.press/plume.png',
+  logo: 'https://github.com/bakalu114514/my-images/blob/main/mygo180x180.png?raw=true',
 
   appearance: true,  // 配置 深色模式
 
@@ -50,9 +50,9 @@ export default defineThemeConfig({
    * @see https://theme-plume.vuejs.press/config/theme/#profile
    */
   profile: {
-    avatar: 'https://theme-plume.vuejs.press/plume.png',
-    name: 'bakalu blog',
-    description: 'blog',
+    avatar: 'https://github.com/bakalu114514/my-images/blob/main/blog%E5%A4%B4%E5%83%8F.png?raw=true',
+    name: 'bakalu的blog',
+    description: '个人技术生活博客',
     // circle: true,
     // location: '',
     // organization: '',
@@ -75,10 +75,10 @@ export default defineThemeConfig({
   // },
 
   /* 过渡动画 @see https://theme-plume.vuejs.press/config/theme/#transition */
-  // transition: {
-  //   page: true,        // 启用 页面间跳转过渡动画
-  //   postList: true,    // 启用 博客文章列表过渡动画
-  //   appearance: 'fade',  // 启用 深色模式切换过渡动画, 或配置过渡动画类型
-  // },
+   transition: {
+     page: true,        // 启用 页面间跳转过渡动画
+     postList: true,    // 启用 博客文章列表过渡动画
+     appearance: 'fade',  // 启用 深色模式切换过渡动画, 或配置过渡动画类型
+   },
 
 })
