@@ -1,11 +1,10 @@
 ---
 title: Vue 学习笔记（七）：Style 样式绑定
-date: 2025-12-23
-  - Vue
-  - 前端学习
-  - 学习笔记
+date: 2025-12-23 - Vue - 前端学习 - 学习笔记
 categories:
   - Vue
+createTime: 2025/12/24 16:24:10
+permalink: /blog/13574rl3/
 ---
 ## 日期：2025.12.24
 

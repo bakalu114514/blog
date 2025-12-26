@@ -1,12 +1,14 @@
 ---
 title: Vue 学习笔记（十）—— ref 与 DOM 操作
-date: 2025-12-26
+date: 2025-12-26T00:00:00.000Z
 tags:
   - Vue
   - 前端学习
   - 学习笔记
 categories:
   - Vue
+createTime: 2025/12/26 11:16:31
+permalink: /blog/aykk9pu3/
 ---
 
 ## 一、为什么需要 ref

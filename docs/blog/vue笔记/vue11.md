@@ -1,12 +1,14 @@
 ---
 title: Vue 学习笔记（十一）—— 组件的基本使用
-date: 2025-12-26
+date: 2025-12-26T00:00:00.000Z
 tags:
   - Vue
   - 前端学习
   - 学习笔记
 categories:
   - Vue
+createTime: 2025/12/26 11:40:23
+permalink: /blog/tcj7sszx/
 ---
 
 ## 一、为什么要使用组件

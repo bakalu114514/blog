@@ -1,0 +1,138 @@
+<template><div><h1 id="vue-学习笔记-五-计算属性-computed" tabindex="-1"><a class="header-anchor" href="#vue-学习笔记-五-计算属性-computed"><span>Vue 学习笔记（五）：计算属性（computed）</span></a></h1>
+<p><strong>日期：2025.12.23</strong><br>
+在前面已经学习了模板语法、事件处理以及数组响应式之后，今天开始接触 <strong>计算属性（computed）</strong>。计算属性是 Vue 中非常重要的一个概念，主要用于<strong>处理模板中的复杂逻辑，并提升性能与可读性</strong>。</p>
+<hr>
+<h2 id="一、为什么需要计算属性" tabindex="-1"><a class="header-anchor" href="#一、为什么需要计算属性"><span>一、为什么需要计算属性？</span></a></h2>
+<p>在模板中可以直接写 JavaScript 表达式，例如：</p>
+<div class="language-html line-numbers-mode" data-highlighter="shiki" data-ext="html" style="--shiki-light:#393a34;--shiki-dark:#dbd7caee;--shiki-light-bg:#ffffff;--shiki-dark-bg:#121212"><pre class="shiki shiki-themes vitesse-light vitesse-dark vp-code" v-pre=""><code class="language-html"><span class="line"><span style="--shiki-light:#999999;--shiki-dark:#666666">&#x3C;</span><span style="--shiki-light:#1E754F;--shiki-dark:#4D9375">p</span><span style="--shiki-light:#999999;--shiki-dark:#666666">></span><span style="--shiki-light:#393A34;--shiki-dark:#DBD7CAEE">{{ classgroup.content.length > 0 ? 'Yes' : 'No' }}</span><span style="--shiki-light:#999999;--shiki-dark:#666666">&#x3C;/</span><span style="--shiki-light:#1E754F;--shiki-dark:#4D9375">p</span><span style="--shiki-light:#999999;--shiki-dark:#666666">></span></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div></div></div><p>虽然这样是可行的，但当逻辑逐渐变复杂时：</p>
+<ul>
+<li>模板会变得臃肿、难以阅读</li>
+<li>同样的逻辑可能被多次使用</li>
+<li>不利于后期维护</li>
+</ul>
+<p>因此，Vue 提供了 <strong>computed 计算属性</strong>，用于将这些逻辑抽离到脚本中统一处理。</p>
+<hr>
+<h2 id="二、示例-使用计算属性简化模板逻辑" tabindex="-1"><a class="header-anchor" href="#二、示例-使用计算属性简化模板逻辑"><span>二、示例：使用计算属性简化模板逻辑</span></a></h2>
+<h3 id="整理后的示例代码" tabindex="-1"><a class="header-anchor" href="#整理后的示例代码"><span>整理后的示例代码</span></a></h3>
+<div class="language-vue line-numbers-mode" data-highlighter="shiki" data-ext="vue" style="--shiki-light:#393a34;--shiki-dark:#dbd7caee;--shiki-light-bg:#ffffff;--shiki-dark-bg:#121212"><pre class="shiki shiki-themes vitesse-light vitesse-dark vp-code" v-pre=""><code class="language-vue"><span class="line"><span style="--shiki-light:#999999;--shiki-dark:#666666">&#x3C;</span><span style="--shiki-light:#1E754F;--shiki-dark:#4D9375">template</span><span style="--shiki-light:#999999;--shiki-dark:#666666">></span></span>
+<span class="line"><span style="--shiki-light:#999999;--shiki-dark:#666666">  &#x3C;</span><span style="--shiki-light:#1E754F;--shiki-dark:#4D9375">h3</span><span style="--shiki-light:#999999;--shiki-dark:#666666">></span><span style="--shiki-light:#393A34;--shiki-dark:#DBD7CAEE">{{ classgroup.name }}</span><span style="--shiki-light:#999999;--shiki-dark:#666666">&#x3C;/</span><span style="--shiki-light:#1E754F;--shiki-dark:#4D9375">h3</span><span style="--shiki-light:#999999;--shiki-dark:#666666">></span></span>
+<span class="line"><span style="--shiki-light:#A0ADA0;--shiki-dark:#758575DD">  &#x3C;!-- &#x3C;p>{{ classgroup.content.length > 0 ? 'Yes' : 'No' }}&#x3C;/p> --></span></span>
+<span class="line"><span style="--shiki-light:#999999;--shiki-dark:#666666">  &#x3C;</span><span style="--shiki-light:#1E754F;--shiki-dark:#4D9375">p</span><span style="--shiki-light:#999999;--shiki-dark:#666666">></span><span style="--shiki-light:#393A34;--shiki-dark:#DBD7CAEE">{{ classContent }}</span><span style="--shiki-light:#999999;--shiki-dark:#666666">&#x3C;/</span><span style="--shiki-light:#1E754F;--shiki-dark:#4D9375">p</span><span style="--shiki-light:#999999;--shiki-dark:#666666">></span></span>
+<span class="line"><span style="--shiki-light:#999999;--shiki-dark:#666666">&#x3C;/</span><span style="--shiki-light:#1E754F;--shiki-dark:#4D9375">template</span><span style="--shiki-light:#999999;--shiki-dark:#666666">></span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#999999;--shiki-dark:#666666">&#x3C;</span><span style="--shiki-light:#1E754F;--shiki-dark:#4D9375">script</span><span style="--shiki-light:#999999;--shiki-dark:#666666">></span></span>
+<span class="line"><span style="--shiki-light:#1E754F;--shiki-dark:#4D9375">export</span><span style="--shiki-light:#1E754F;--shiki-dark:#4D9375"> default</span><span style="--shiki-light:#999999;--shiki-dark:#666666"> {</span></span>
+<span class="line"><span style="--shiki-light:#59873A;--shiki-dark:#80A665">  data</span><span style="--shiki-light:#999999;--shiki-dark:#666666">()</span><span style="--shiki-light:#999999;--shiki-dark:#666666"> {</span></span>
+<span class="line"><span style="--shiki-light:#1E754F;--shiki-dark:#4D9375">    return</span><span style="--shiki-light:#999999;--shiki-dark:#666666"> {</span></span>
+<span class="line"><span style="--shiki-light:#998418;--shiki-dark:#B8A965">      classgroup</span><span style="--shiki-light:#999999;--shiki-dark:#666666">:</span><span style="--shiki-light:#999999;--shiki-dark:#666666"> {</span></span>
+<span class="line"><span style="--shiki-light:#998418;--shiki-dark:#B8A965">        name</span><span style="--shiki-light:#999999;--shiki-dark:#666666">:</span><span style="--shiki-light:#B5695977;--shiki-dark:#C98A7D77"> '</span><span style="--shiki-light:#B56959;--shiki-dark:#C98A7D">小羊</span><span style="--shiki-light:#B5695977;--shiki-dark:#C98A7D77">'</span><span style="--shiki-light:#999999;--shiki-dark:#666666">,</span></span>
+<span class="line"><span style="--shiki-light:#998418;--shiki-dark:#B8A965">        content</span><span style="--shiki-light:#999999;--shiki-dark:#666666">:</span><span style="--shiki-light:#999999;--shiki-dark:#666666"> [</span><span style="--shiki-light:#B5695977;--shiki-dark:#C98A7D77">'</span><span style="--shiki-light:#B56959;--shiki-dark:#C98A7D">前端</span><span style="--shiki-light:#B5695977;--shiki-dark:#C98A7D77">'</span><span style="--shiki-light:#999999;--shiki-dark:#666666">,</span><span style="--shiki-light:#B5695977;--shiki-dark:#C98A7D77"> '</span><span style="--shiki-light:#B56959;--shiki-dark:#C98A7D">Java</span><span style="--shiki-light:#B5695977;--shiki-dark:#C98A7D77">'</span><span style="--shiki-light:#999999;--shiki-dark:#666666">,</span><span style="--shiki-light:#B5695977;--shiki-dark:#C98A7D77"> '</span><span style="--shiki-light:#B56959;--shiki-dark:#C98A7D">Python</span><span style="--shiki-light:#B5695977;--shiki-dark:#C98A7D77">'</span><span style="--shiki-light:#999999;--shiki-dark:#666666">]</span></span>
+<span class="line"><span style="--shiki-light:#999999;--shiki-dark:#666666">      }</span></span>
+<span class="line"><span style="--shiki-light:#999999;--shiki-dark:#666666">    }</span></span>
+<span class="line"><span style="--shiki-light:#999999;--shiki-dark:#666666">  },</span></span>
+<span class="line"><span style="--shiki-light:#A0ADA0;--shiki-dark:#758575DD">  // 计算属性</span></span>
+<span class="line"><span style="--shiki-light:#998418;--shiki-dark:#B8A965">  computed</span><span style="--shiki-light:#999999;--shiki-dark:#666666">:</span><span style="--shiki-light:#999999;--shiki-dark:#666666"> {</span></span>
+<span class="line"><span style="--shiki-light:#59873A;--shiki-dark:#80A665">    classContent</span><span style="--shiki-light:#999999;--shiki-dark:#666666">()</span><span style="--shiki-light:#999999;--shiki-dark:#666666"> {</span></span>
+<span class="line"><span style="--shiki-light:#1E754F;--shiki-dark:#4D9375">      return</span><span style="--shiki-light:#A65E2B;--shiki-dark:#C99076"> this</span><span style="--shiki-light:#999999;--shiki-dark:#666666">.</span><span style="--shiki-light:#B07D48;--shiki-dark:#BD976A">classgroup</span><span style="--shiki-light:#999999;--shiki-dark:#666666">.</span><span style="--shiki-light:#B07D48;--shiki-dark:#BD976A">content</span><span style="--shiki-light:#999999;--shiki-dark:#666666">.</span><span style="--shiki-light:#998418;--shiki-dark:#B8A965">length</span><span style="--shiki-light:#999999;--shiki-dark:#666666"> ></span><span style="--shiki-light:#2F798A;--shiki-dark:#4C9A91"> 0</span><span style="--shiki-light:#AB5959;--shiki-dark:#CB7676"> ?</span><span style="--shiki-light:#B5695977;--shiki-dark:#C98A7D77"> '</span><span style="--shiki-light:#B56959;--shiki-dark:#C98A7D">Yes</span><span style="--shiki-light:#B5695977;--shiki-dark:#C98A7D77">'</span><span style="--shiki-light:#AB5959;--shiki-dark:#CB7676"> :</span><span style="--shiki-light:#B5695977;--shiki-dark:#C98A7D77"> '</span><span style="--shiki-light:#B56959;--shiki-dark:#C98A7D">No</span><span style="--shiki-light:#B5695977;--shiki-dark:#C98A7D77">'</span></span>
+<span class="line"><span style="--shiki-light:#999999;--shiki-dark:#666666">    }</span></span>
+<span class="line"><span style="--shiki-light:#999999;--shiki-dark:#666666">  }</span></span>
+<span class="line"><span style="--shiki-light:#999999;--shiki-dark:#666666">}</span></span>
+<span class="line"><span style="--shiki-light:#999999;--shiki-dark:#666666">&#x3C;/</span><span style="--shiki-light:#1E754F;--shiki-dark:#4D9375">script</span><span style="--shiki-light:#999999;--shiki-dark:#666666">></span></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="代码说明" tabindex="-1"><a class="header-anchor" href="#代码说明"><span>代码说明</span></a></h3>
+<ul>
+<li><code v-pre>classContent</code> 是一个计算属性</li>
+<li>它依赖于 <code v-pre>classgroup.content.length</code></li>
+<li>当 <code v-pre>content</code> 数组发生变化时，<code v-pre>classContent</code> 会自动重新计算</li>
+<li>模板中只需像普通变量一样使用 <code v-pre>{{ classContent }}</code></li>
+</ul>
+<hr>
+<h2 id="三、computed-与-methods-的核心区别-重点" tabindex="-1"><a class="header-anchor" href="#三、computed-与-methods-的核心区别-重点"><span>三、computed 与 methods 的核心区别（重点）</span></a></h2>
+<p>这是理解计算属性时<strong>必须掌握的一点</strong>。</p>
+<h3 id="_1-computed-的特点" tabindex="-1"><a class="header-anchor" href="#_1-computed-的特点"><span>1. computed 的特点</span></a></h3>
+<ul>
+<li><strong>基于响应式依赖进行缓存</strong></li>
+<li>只有当依赖的数据发生变化时，才会重新计算</li>
+<li>多次访问，结果直接从缓存中读取</li>
+</ul>
+<h3 id="_2-methods-的特点" tabindex="-1"><a class="header-anchor" href="#_2-methods-的特点"><span>2. methods 的特点</span></a></h3>
+<ul>
+<li>不具备缓存机制</li>
+<li>只要组件重新渲染，方法就会被重新调用</li>
+<li>调用次数 = 访问次数</li>
+</ul>
+<h3 id="对比示例说明" tabindex="-1"><a class="header-anchor" href="#对比示例说明"><span>对比示例说明</span></a></h3>
+<p>假设：</p>
+<ul>
+<li>页面中多次使用同一个结果</li>
+<li>且依赖的数据没有发生变化</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>computed</th>
+<th>methods</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>是否缓存结果</td>
+<td>是</td>
+<td>否</td>
+</tr>
+<tr>
+<td>是否依赖响应式数据</td>
+<td>是</td>
+<td>是</td>
+</tr>
+<tr>
+<td>多次调用开销</td>
+<td>低</td>
+<td>高</td>
+</tr>
+<tr>
+<td>推荐使用场景</td>
+<td>计算型数据</td>
+<td>事件 / 动作逻辑</td>
+</tr>
+</tbody>
+</table>
+<p>正如你在注释中提到的：</p>
+<blockquote>
+<p>在计算条件不变的情况下，计算属性被访问 100 次，也只会计算 1 次；而方法会执行 100 次。</p>
+</blockquote>
+<p>这也是为什么 <strong>computed 更适合用于“结果型数据”</strong>。</p>
+<hr>
+<h2 id="四、计算属性的典型使用场景-补充" tabindex="-1"><a class="header-anchor" href="#四、计算属性的典型使用场景-补充"><span>四、计算属性的典型使用场景（补充）</span></a></h2>
+<p>计算属性通常用于：</p>
+<ul>
+<li>对已有数据进行加工、筛选、统计</li>
+<li>根据多个响应式数据推导出一个新结果</li>
+<li>替代模板中过于复杂的表达式</li>
+</ul>
+<p>例如：</p>
+<ul>
+<li>列表过滤</li>
+<li>状态判断（是否为空、是否达标）</li>
+<li>多字段组合显示</li>
+</ul>
+<hr>
+<h2 id="五、使用计算属性的好处总结" tabindex="-1"><a class="header-anchor" href="#五、使用计算属性的好处总结"><span>五、使用计算属性的好处总结</span></a></h2>
+<ul>
+<li>提升模板可读性，避免复杂逻辑直接写在模板中</li>
+<li>提高性能，避免不必要的重复计算</li>
+<li>代码结构更清晰，职责更明确</li>
+</ul>
+<hr>
+<h2 id="小结" tabindex="-1"><a class="header-anchor" href="#小结"><span>小结</span></a></h2>
+<p>本次学习的重点内容包括：</p>
+<ul>
+<li>计算属性 <code v-pre>computed</code> 的基本用法</li>
+<li>计算属性与 <code v-pre>methods</code> 的本质区别</li>
+<li>计算属性在性能和可维护性上的优势</li>
+</ul>
+<p>计算属性是 Vue 中非常核心的一部分，后续学习 <code v-pre>watch</code>、组件通信以及状态管理时，都会频繁与它打交道。</p>
+</div></template>
+
+

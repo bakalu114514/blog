@@ -1,12 +1,14 @@
 ---
 title: Vue 学习笔记（六）：Class 样式绑定
-date: 2025-12-23
+date: 2025-12-23T00:00:00.000Z
 tags:
   - Vue
   - 前端学习
   - 学习笔记
 categories:
   - Vue
+createTime: 2025/12/24 15:48:42
+permalink: /blog/ohnfnbf3/
 ---
 
 # Vue 学习笔记（六）：Class 样式绑定

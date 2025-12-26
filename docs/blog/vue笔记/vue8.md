@@ -1,12 +1,14 @@
 ---
 title: Vue 学习笔记（八）—— 侦听器 watch
-date: 2025-12-23
+date: 2025-12-23T00:00:00.000Z
 tags:
   - Vue
   - 前端学习
   - 学习笔记
 categories:
   - Vue
+createTime: 2025/12/25 15:13:38
+permalink: /blog/22jmj1gz/
 ---
 ## 日期：2025.12.25
 

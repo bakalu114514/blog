@@ -1,12 +1,14 @@
 ---
 title: Vue 学习笔记（四）：数组变化监听与响应式更新
-date: 2025-12-22
+date: 2025-12-22T00:00:00.000Z
 tags:
   - Vue
   - 前端学习
   - 学习笔记
 categories:
   - Vue
+createTime: 2025/12/23 11:01:01
+permalink: /blog/gic3e07h/
 ---
 
 # Vue 学习笔记（四）：数组变化监听与响应式更新

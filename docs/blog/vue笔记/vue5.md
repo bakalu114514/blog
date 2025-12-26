@@ -1,12 +1,14 @@
 ---
 title: Vue 学习笔记（五）：计算属性（computed）
-date: 2025-12-22
+date: 2025-12-22T00:00:00.000Z
 tags:
   - Vue
   - 前端学习
   - 学习笔记
 categories:
   - Vue
+createTime: 2025/12/23 11:29:00
+permalink: /blog/wp5rcuwv/
 ---
 
 # Vue 学习笔记（五）：计算属性（computed）

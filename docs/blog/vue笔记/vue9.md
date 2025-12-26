@@ -1,12 +1,14 @@
 ---
 title: Vue 学习笔记（九）—— 表单输入绑定 v-model
-date: 2025-12-24
+date: 2025-12-24T00:00:00.000Z
 tags:
   - Vue
   - 前端学习
   - 学习笔记
 categories:
   - Vue
+createTime: 2025/12/25 17:17:45
+permalink: /blog/npqr4qzp/
 ---
 
 ## 一、v-model 的作用与意义
